@@ -2,12 +2,14 @@ import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import expr
 spark=SparkSession.builder.appName("test").getOrCreate()
-data = [("Banana",1000,"USA"), ("Carrots",1500,"USA"), ("Beans",1600,"USA"), \
-      ("Orange",2000,"USA"),("Orange",2000,"USA"),("Banana",400,"China"), \
-      ("Carrots",1200,"China"),("Beans",1500,"China"),("Orange",4000,"China"), \
-      ("Banana",2000,"Canada"),("Carrots",2000,"Canada"),("Beans",2000,"Mexico")]
 
-columns= ["Product","Amount","Country"]
-df = spark.createDataFrame(data = data, schema = columns)
-df.printSchema()
-df.show(truncate=False)
+path = "/Users/naveenkumarreddyreddivari/Downloads/FINAL_OUTPUT27022025.csv"
+
+spark.conf.set("spark.sql.shuffle.partitions", "10")  # Set to a lower number for testing
+spark.conf.set("spark.sql.files.maxPartitionBytes",'256MB') # Set to a lower value for testing, e.g., 64MB
+df=spark.read.csv(path, header=True, inferSchema=True)
+
+
+print(spark.conf.get("spark.sql.shuffle.partitions"))  # Default is 200
+print(df.rdd.getNumPartitions())  # Check number of partitions
+print(spark.conf.get("spark.sql.files.maxPartitionBytes"))  # Default is 128MB
