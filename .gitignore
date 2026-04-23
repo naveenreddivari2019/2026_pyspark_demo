@@ -62,6 +62,9 @@ spark-events/
 *~
 .DS_Store
 
+# Claude Code
+.claude/settings.local.json
+
 # Environment variables
 .env
 .env.local

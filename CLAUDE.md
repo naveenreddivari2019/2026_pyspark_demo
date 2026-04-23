@@ -72,3 +72,11 @@ Current dependencies:
 - PySpark scripts print schemas and show DataFrames for demonstration
 - SQL examples include commented descriptions of what each query demonstrates
 - Threading examples use simple domains (chai shop, orders) to illustrate concurrency concepts
+
+## Claude Code Integration
+
+This repository has Claude Code configured with:
+- **Virtual environment check hook**: Warns if venv is not activated before running Python
+- **Pre-approved permissions**: Common Python/PySpark/pip commands won't prompt
+- **Custom slash commands**: `/run-pyspark`, `/run-python`, `/run-sql`, `/run-threading` for easy example execution
+- See `.claude/README.md` for full details on configuration and usage
