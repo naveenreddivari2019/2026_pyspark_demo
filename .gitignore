@@ -81,3 +81,6 @@ Desktop.ini
 *.json
 !requirements.txt
 !package.json
+
+#delta
+pivot_table/
