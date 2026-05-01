@@ -13,3 +13,6 @@ df=spark.read.csv(path, header=True, inferSchema=True)
 print(spark.conf.get("spark.sql.shuffle.partitions"))  # Default is 200
 print(df.rdd.getNumPartitions())  # Check number of partitions
 print(spark.conf.get("spark.sql.files.maxPartitionBytes"))  # Default is 128MB
+
+#write in csv partionby country using format csv
+df.write.format("csv").option("header", "true").partitionBy("country").mode("overwrite").save("/Users/naveenkumarreddyreddivari/Downloads/FINAL_OUTPUT27022025_partitioned")
