@@ -7,7 +7,7 @@ path = "/Users/naveenkumarreddyreddivari/Downloads/FINAL_OUTPUT27022025.csv"
 
 spark.conf.set("spark.sql.shuffle.partitions", "10")  # Set to a lower number for testing
 spark.conf.set("spark.sql.files.maxPartitionBytes",'256MB') # Set to a lower value for testing, e.g., 64MB
-#df=spark.read.format("csv").option("header", "true").load(path)
+#df=spark.read.format("csv").schema(schema1).option("header", "true").load(path)
 df=spark.read.csv(path,header=True,inferSchema=True)
 
 
