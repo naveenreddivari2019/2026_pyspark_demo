@@ -17,11 +17,15 @@ import os
 # Configure Spark with Delta Lake
 builder = SparkSession.builder \
     .appName("CDF_Delta_Example") \
-    .master("local[*]") \
-    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
-    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.DeltaCatalog")
+    .master("local[1]") \
+    .config("spark.driver.host", "127.0.0.1") \
+    .config("spark.driver.bindAddress", "127.0.0.1") \
+    .config("spark.ui.enabled", "false")
 
-spark = configure_spark_with_delta_pip(builder).getOrCreate()
+spark = configure_spark_with_delta_pip(builder) \
+    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
+    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
+    .getOrCreate()
 
 # Define table path
 delta_table_path = "/tmp/delta_cdf_example"
