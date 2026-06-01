@@ -16,8 +16,9 @@ spark = SparkSession.builder \
     .config("spark.ui.enabled", "false") \
     .getOrCreate()
 
-# Path to Excel file
-excel_file_path = "/Users/naveenkumarreddyreddivari/Git_2026_personal/2026_pyspark_demo/2026_pyspark_demo/src/sample_data.xlsx"
+# Path to Excel file (relative to repo root)
+script_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+excel_file_path = os.path.join(script_dir, "sample_data.xlsx")
 
 # Method 1: Read specific sheet using pandas and convert to PySpark DataFrame
 sheet_name = "Sheet1"  # Change to desired sheet name
@@ -41,7 +42,7 @@ for sheet in excel_file.sheet_names:
     all_dfs[sheet].show(truncate=False)
 
 # Write to CSV (optional)
-output_path = "/Users/naveenkumarreddyreddivari/Git_2026_personal/2026_pyspark_demo/2026_pyspark_demo/src/excel_output"
+output_path = os.path.join(script_dir, "excel_output")
 df.write.mode("overwrite").csv(output_path, header=True)
 print(f"\nData written to: {output_path}")
 

@@ -84,3 +84,6 @@ Desktop.ini
 
 #delta
 pivot_table/
+
+#excel
+excel_output/
