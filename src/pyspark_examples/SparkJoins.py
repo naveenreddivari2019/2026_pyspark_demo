@@ -64,4 +64,12 @@ cross_join = df1.crossJoin(df2)
 print("Cross Join Result:")
 cross_join.show()
 
+#join hints 
+broadcast_join = df1.join(df2.hint("shuffle_hash"), on="id", how="inner")
+print("Broadcast Join Result:")
+broadcast_join.explain()
+broadcast_join.show()
+
+
+
 

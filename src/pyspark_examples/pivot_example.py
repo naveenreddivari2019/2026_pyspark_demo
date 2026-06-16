@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import sum
 
 # Create a SparkSession
 spark = SparkSession.builder \
@@ -30,7 +31,8 @@ df = spark.createDataFrame(data, columns)
 df.show()
 
 # Perform pivot operation
-pivot_df = df.groupBy("Product").pivot("Country").sum("Amount")
+#pivot_df = df.groupBy("Product").pivot("Country").sum("Amount")
+pivot_df = df.groupBy("Product").pivot("Country").agg(sum("Amount"))
 
 # Show the result
 pivot_df.show()
