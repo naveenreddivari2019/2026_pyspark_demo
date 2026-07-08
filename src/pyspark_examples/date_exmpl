@@ -1,0 +1,48 @@
+#working examples with date and timestamp
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+
+spark=SparkSession.builder.appName("Date and Timestamp Examples").getOrCreate()
+
+schema= "date_str string, timestamp_str string"
+df=spark.createDataFrame(
+    [
+        ("2023-01-01", "2023-01-01 12:00:00"),
+        ("2023-02-15", "2023-02-15 15:30:00"),
+        ("2023-03-10", "2023-03-10 09:45:00")
+    ],
+    schema
+)
+df.printSchema()
+df.show()
+
+# Convert string to date and timestamp
+df_with_date_timestamp = df.withColumn("date", to_date(col("date_str"), "yyyy-MM-dd")) \
+                             .withColumn("timestamp", to_timestamp(col("timestamp_str"), "yyyy-MM-dd HH:mm:ss"))\
+                                .withColumn("year", year(col("date"))) \
+                                    .withColumn("month", month(col("date"))) \
+                                        .withColumn("day", dayofmonth(col("date"))) \
+                                            .withColumn("hour", hour(col("timestamp"))) \
+                                                .withColumn("minute", minute(col("timestamp"))) \
+                                                    .withColumn("second", second(col("timestamp")))\
+                                                        .withColumn("current Date", current_date()) \
+                                                            .withColumn("current Timestamp", current_timestamp())
+
+df_with_date_timestamp.printSchema()    
+
+df_with_date_timestamp.show(truncate=False)
+
+#date formats using date_format function
+df_with_date_formats = df_with_date_timestamp.withColumn("date_format_1", date_format(col("date"), "dd-MM-yyyy")) \
+                                                .withColumn("date_format_2", date_format(col("date"), "MM/dd/yyyy")) \
+                                                    .withColumn("date_format_3", date_format(col("date"), "yyyy/MM/dd")) \
+                                                        .withColumn("timestamp_format_1", date_format(col("timestamp"), "dd-MM-yyyy HH:mm:ss")) \
+                                                            .withColumn("timestamp_format_2", date_format(col("timestamp"), "MM/dd/yyyy HH:mm:ss")) \
+                                                                .withColumn("timestamp_format_3", date_format(col("timestamp"), "yyyy/MM/dd HH:mm:ss"))
+
+df_with_date_formats=df_with_date_formats.select("date_format_1", "date_format_2", "date_format_3", "timestamp_format_1", "timestamp_format_2", "timestamp_format_3")
+df_with_date_formats.printSchema()
+df_with_date_formats.show(truncate=False)
+
+

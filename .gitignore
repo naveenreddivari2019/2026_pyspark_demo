@@ -87,3 +87,6 @@ pivot_table/
 
 #excel
 excel_output/
+
+#delta tables
+delta_tables/

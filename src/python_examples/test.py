@@ -30,3 +30,8 @@ for num in nums:
 
 print(unique)  # [1, 2, 3, 4]
 print(duplicate)  # [2, 4]
+
+
+nums=[4,2,7,1,3]
+sorted_nums = sorted(nums,reverse=True)
+print(sorted_nums)  # [1, 2, 3, 4, 7]

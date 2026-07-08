@@ -34,6 +34,7 @@ df.show()
 #pivot_df = df.groupBy("Product").pivot("Country").sum("Amount")
 pivot_df = df.groupBy("Product").pivot("Country").agg(sum("Amount"))
 
+pivot_df.explain(True)  # Explain the physical plan
 # Show the result
 pivot_df.show()
 

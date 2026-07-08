@@ -6,14 +6,14 @@ spark=SparkSession.builder.appName("test").getOrCreate()
 path = "/Users/naveenkumarreddyreddivari/Downloads/FINAL_OUTPUT27022025.csv"
 
 spark.conf.set("spark.sql.shuffle.partitions", "10")  # Set to a lower number for testing
-spark.conf.set("spark.sql.files.maxPartitionBytes",'256MB') # Set to a lower value for testing, e.g., 64MB
+#spark.conf.set("spark.sql.files.maxPartitionBytes",'256MB') # Set to a lower value for testing, e.g., 64MB
 #df=spark.read.format("csv").schema(schema1).option("header", "true").load(path)
 df=spark.read.csv(path,header=True,inferSchema=True)
-
+print(f' No of Partitions {df.rdd.getNumPartitions()}')  # Check number of partitions
 
 print(spark.conf.get("spark.sql.shuffle.partitions"))  # Default is 200
 print(spark.conf.get("spark.sql.files.openCostInBytes"))  # Default is 4KB
-print(df.rdd.getNumPartitions())  # Check number of partitions
+
 print(spark.conf.get("spark.sql.files.maxPartitionBytes"))  # Default is 128MB
 
 #write in csv partionby country using format csv

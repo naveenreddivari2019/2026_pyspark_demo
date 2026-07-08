@@ -8,6 +8,7 @@ def group_anagrams(words):
         anagram_map[key].append(word)
 
     print(f'anagram_map : {anagram_map}')
+    print(f'anagram_map.keys() : {anagram_map.keys()}')
     return list(anagram_map.values())
 
 

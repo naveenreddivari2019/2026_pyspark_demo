@@ -40,3 +40,6 @@ result={**dic1,**dic2} #creates new dictionary unpacking the key value pairs of 
 print(result)
 result2=dic1 | dic2 #creates new dictionary by merging d1 and d2, if there are duplicate keys, the value from d2 will be used
 print(result2)
+#update updates the original dictionary with the key value pairs of the other dictionary
+dic1.update(dic2) #creates new dictionary by merging d1 and d2, if there are duplicate keys, the value from d2 will be used
+print(dic1)

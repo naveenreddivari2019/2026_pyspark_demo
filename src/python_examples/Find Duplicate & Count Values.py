@@ -22,14 +22,15 @@ print(l1)
 print(l1.count(3))
 
 # Method 1: Using a loop (existing approach)
-l2 = []
-l3 = []
+unique = []
+duplicate = []
 for i in l1:
-    if i in l2:
-        l3.append(i)
+    if i not in unique:
+        unique.append(i)
     else:
-        l2.append(i)
-print("Duplicates (Method 1):", l3)
+        duplicate.append(i)
+
+print(f"Duplicates (Method 1): {duplicate}")
 
 # Method 2: Using list comprehension
 duplicates = [i for i in l1 if l1.count(i) >1 ]

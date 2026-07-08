@@ -22,10 +22,11 @@ print("Method 4 (list.reverse):", ''.join(str_list))
 # Method 5: Using recursion
 def reverse_string(s):
     print("Current string:", s)
+    print("length of string:", len(s))
     if len(s) == 0:
         return s
     return reverse_string(s[1:]) + s[0]
-print("Method 5 (Recursion):", reverse_string(str1))
+print("Method 5 (Recursion):", reverse_string('h'))
 
 
 

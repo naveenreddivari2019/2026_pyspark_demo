@@ -2,3 +2,4 @@ pandas==2.2.3
 pyspark==3.5.4
 delta-spark==3.3.2
 requests==2.34.2
+great_expectations==1.18.1
